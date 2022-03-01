@@ -1,7 +1,6 @@
 # Azure DNS Recordsets Module
 
-This module manages DNS recordsets in a given Azure DNS zone. It is part of
-[the `terraformdns` project](https://terraformdns.github.io/).
+This module manages DNS recordsets in a given Azure DNS zone. 
 
 ## Example Usage
 

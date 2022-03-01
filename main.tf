@@ -6,7 +6,7 @@ terraform {
   }
 }
 
-data "azurerm_dns_zone" "example" {
+data "azurerm_dns_zone" "dnszone" {
   # We request this only as an early check that it exists. We don't actually
   # need any additional information from it, since its identifier is its name.
   resource_group_name = var.resource_group_name
@@ -63,8 +63,8 @@ locals {
 resource "azurerm_dns_a_record" "this" {
   count = length(local.a_recordsets)
 
-  resource_group_name = data.azurerm_dns_zone.example.resource_group_name
-  zone_name           = data.azurerm_dns_zone.example.name
+  resource_group_name = data.azurerm_dns_zone.dnszone.resource_group_name
+  zone_name           = data.azurerm_dns_zone.dnszone.name
 
   name    = coalesce(local.a_recordsets[count.index].name, "@")
   ttl     = local.a_recordsets[count.index].ttl
@@ -74,8 +74,8 @@ resource "azurerm_dns_a_record" "this" {
 resource "azurerm_dns_aaaa_record" "this" {
   count = length(local.aaaa_recordsets)
 
-  resource_group_name = data.azurerm_dns_zone.example.resource_group_name
-  zone_name           = data.azurerm_dns_zone.example.name
+  resource_group_name = data.azurerm_dns_zone.dnszone.resource_group_name
+  zone_name           = data.azurerm_dns_zone.dnszone.name
 
   name    = coalesce(local.aaaa_recordsets[count.index].name, "@")
   ttl     = local.aaaa_recordsets[count.index].ttl
@@ -85,8 +85,8 @@ resource "azurerm_dns_aaaa_record" "this" {
 resource "azurerm_dns_cname_record" "this" {
   count = length(local.cname_records)
 
-  resource_group_name = data.azurerm_dns_zone.example.resource_group_name
-  zone_name           = data.azurerm_dns_zone.example.name
+  resource_group_name = data.azurerm_dns_zone.dnszone.resource_group_name
+  zone_name           = data.azurerm_dns_zone.dnszone.name
 
   name   = coalesce(local.cname_records[count.index].name, "@")
   ttl    = local.cname_records[count.index].ttl
@@ -96,8 +96,8 @@ resource "azurerm_dns_cname_record" "this" {
 resource "azurerm_dns_mx_record" "this" {
   count = length(local.mx_recordsets)
 
-  resource_group_name = data.azurerm_dns_zone.example.resource_group_name
-  zone_name           = data.azurerm_dns_zone.example.name
+  resource_group_name = data.azurerm_dns_zone.dnszone.resource_group_name
+  zone_name           = data.azurerm_dns_zone.dnszone.name
 
   name = coalesce(local.mx_recordsets[count.index].name, "@")
   ttl  = local.mx_recordsets[count.index].ttl
@@ -114,8 +114,8 @@ resource "azurerm_dns_mx_record" "this" {
 resource "azurerm_dns_ns_record" "this" {
   count = length(local.ns_recordsets)
 
-  resource_group_name = data.azurerm_dns_zone.example.resource_group_name
-  zone_name           = data.azurerm_dns_zone.example.name
+  resource_group_name = data.azurerm_dns_zone.dnszone.resource_group_name
+  zone_name           = data.azurerm_dns_zone.dnszone.name
 
   name    = coalesce(local.ns_recordsets[count.index].name, "@")
   ttl     = local.ns_recordsets[count.index].ttl
@@ -125,8 +125,8 @@ resource "azurerm_dns_ns_record" "this" {
 resource "azurerm_dns_ptr_record" "this" {
   count = length(local.ptr_recordsets)
 
-  resource_group_name = data.azurerm_dns_zone.example.resource_group_name
-  zone_name           = data.azurerm_dns_zone.example.name
+  resource_group_name = data.azurerm_dns_zone.dnszone.resource_group_name
+  zone_name           = data.azurerm_dns_zone.dnszone.name
 
   name    = coalesce(local.ptr_recordsets[count.index].name, "@")
   ttl     = local.ptr_recordsets[count.index].ttl
@@ -136,8 +136,8 @@ resource "azurerm_dns_ptr_record" "this" {
 resource "azurerm_dns_srv_record" "this" {
   count = length(local.srv_recordsets)
 
-  resource_group_name = data.azurerm_dns_zone.example.resource_group_name
-  zone_name           = data.azurerm_dns_zone.example.name
+  resource_group_name = data.azurerm_dns_zone.dnszone.resource_group_name
+  zone_name           = data.azurerm_dns_zone.dnszone.name
 
   name = coalesce(local.srv_recordsets[count.index].name, "@")
   ttl  = local.srv_recordsets[count.index].ttl
@@ -156,8 +156,8 @@ resource "azurerm_dns_srv_record" "this" {
 resource "azurerm_dns_txt_record" "this" {
   count = length(local.txt_recordsets)
 
-  resource_group_name = data.azurerm_dns_zone.example.resource_group_name
-  zone_name           = data.azurerm_dns_zone.example.name
+  resource_group_name = data.azurerm_dns_zone.dnszone.resource_group_name
+  zone_name           = data.azurerm_dns_zone.dnszone.name
 
   name = coalesce(local.txt_recordsets[count.index].name, "@")
   ttl  = local.txt_recordsets[count.index].ttl
