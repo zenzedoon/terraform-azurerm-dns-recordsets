@@ -27,7 +27,7 @@ module "dns_records" {
       type    = "A"
       ttl     = 3600
       records = [
-        "192.0.2.56",
+        "212.1.2.3",
       ]
     },
     {
@@ -35,17 +35,9 @@ module "dns_records" {
       type    = "MX"
       ttl     = 3600
       records = [
-        "1 mail1",
+        "1 mail1", ##  Preference (nbr) - mail exchange (string)
         "5 mail2",
         "5 mail3",
-      ]
-    },
-    {
-      name    = ""
-      type    = "TXT"
-      ttl     = 3600
-      records = [
-        "\"v=spf1 ip4:192.0.2.3 include:backoff.${aws_route53_zone.example.name} -all\"",
       ]
     },
     {
@@ -53,7 +45,7 @@ module "dns_records" {
       type    = "SRV"
       ttl     = 3600
       records = [
-        "10 60 5060 sip1",
+        "10 60 5060 sip1", ## priority (nbr) Weight (nbr) Port (nbr) Target (string)
         "10 20 5060 sip2",
         "10 20 5060 sip3",
         "20  0 5060 sip4",
@@ -63,12 +55,6 @@ module "dns_records" {
 }
 ```
 
-## Compatibility
-
-When using this module, always use a version constraint that constraints to at
-least a single major version. Future major versions may have new or different
-required arguments, and may use a different internal structure that could
-cause recordsets to be removed and replaced by the next plan.
 
 ## Arguments
 
