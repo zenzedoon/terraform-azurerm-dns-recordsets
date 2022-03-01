@@ -105,8 +105,8 @@ resource "azurerm_dns_mx_record" "this" {
   dynamic "record" {
     for_each = local.mx_recordsets[count.index].records
     content {
-      preference = split(record.value,",")[0]
-      exchange   = split(record.value,",")[1]
+      preference = split(",",record.value)[0]
+      exchange = split(",",record.value)[1]
     }
   }
 }
