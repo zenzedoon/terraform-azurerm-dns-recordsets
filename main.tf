@@ -143,7 +143,7 @@ resource "azurerm_dns_srv_record" "this" {
   ttl  = local.srv_recordsets[count.index].ttl
 
   dynamic "record" {
-    for_each = srv_recordsets[count.index].records
+    for_each = local.srv_recordsets[count.index].records
     content {
       priority = split(record.value, " ")[0]
       weight   = split(record.value, " ")[1]
@@ -163,7 +163,7 @@ resource "azurerm_dns_txt_record" "this" {
   ttl  = local.txt_recordsets[count.index].ttl
 
   dynamic "record" {
-    for_each = txt_recordsets[count.index].records
+    for_each = local.txt_recordsets[count.index].records
     content {
       value = record.value
     }
