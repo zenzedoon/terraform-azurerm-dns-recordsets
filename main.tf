@@ -146,7 +146,7 @@ resource "azurerm_dns_srv_record" "this" {
     for_each = local.srv_recordsets[count.index].records
     content {
       priority = split(" ",record.value)[0]
-      weight   = split(" ",record.value)[1]
+      weight   = tonumber(split(" ",record.value)[1])
       port     = split(" ",record.value)[2]
       target   = split(" ",record.value)[3]
     }
